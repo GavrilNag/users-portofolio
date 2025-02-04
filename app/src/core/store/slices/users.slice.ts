@@ -17,7 +17,6 @@ export const usersSlice = createSlice({
       state.availableUsers.data = action.payload;
       state.availableUsers.status = 'success';
     },
-
     handleUsersLoading: (state) => {
       state.availableUsers.status = 'loading';
     },

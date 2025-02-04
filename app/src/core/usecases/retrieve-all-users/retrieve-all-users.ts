@@ -8,7 +8,7 @@ export const fetchUsers =
     dispatch(usersSlice.actions.handleUsersLoading());
     try {
       const users = await userRepository.fetchUsers();
-      dispatch(usersSlice.actions.storeUsers(users.map((user) => user)));
+      dispatch(usersSlice.actions.storeUsers(users));
     } catch (e) {
       dispatch(usersSlice.actions.handleUsersError(extractErrorMessage(e)));
     }

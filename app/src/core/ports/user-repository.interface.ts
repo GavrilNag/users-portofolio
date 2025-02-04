@@ -1,10 +1,5 @@
-import { User } from '../entities/user';
+import { UserDomainModel } from '../model/user.domain-model';
 
 export interface IUserRepository {
-  fetchUsers(): Promise<User[]>;
-  findUserById(id: string): Promise<User>;
-  findUserByEmail(email: string): Promise<User>;
-  createUser(user: User): Promise<User>;
-  updateUser(user: User): Promise<User>;
-  deleteUser(user: User): Promise<void>;
+  fetchUsers(): Promise<UserDomainModel.User[]>;
 }

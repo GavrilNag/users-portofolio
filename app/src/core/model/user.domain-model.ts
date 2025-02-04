@@ -1,11 +1,11 @@
 export namespace UserDomainModel {
   export type User = {
     id: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
-    birthdate: Date;
+    birthdate: string;
   };
 
   export type State = {

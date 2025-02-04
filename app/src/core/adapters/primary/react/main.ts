@@ -1,3 +1,4 @@
+import { UserFactory } from '@/core/model/user.factory';
 import { Dependencies } from '@/core/store/dependencies';
 import { AppStore, createStore } from '@/core/store/store';
 import { InMemoryUserRepository } from '../../secondary/user-repository/in-memory.user-repository';
@@ -13,7 +14,9 @@ export class App {
 
   setupDependencies(): Dependencies {
     return {
-      userRepository: new InMemoryUserRepository(),
+      userRepository: new InMemoryUserRepository([
+        UserFactory.create({ id: '1', firstName: 'John', lastName: 'Doe' }),
+      ]),
     };
   }
 }

@@ -1,45 +1,14 @@
-import { User } from '@/core/entities/user';
+import { UserDomainModel } from '@/core/model/user.domain-model';
 import { IUserRepository } from '@/core/ports/user-repository.interface';
 
 export class InMemoryUserRepository implements IUserRepository {
-  public users: User[] = [];
+  public users: UserDomainModel.User[] = [];
 
-  constructor(users: User[] = []) {
+  constructor(users: UserDomainModel.User[] = []) {
     this.users = users;
   }
 
-  async fetchUsers(): Promise<User[]> {
+  async fetchUsers() {
     return this.users;
-  }
-
-  async createUser(user: User) {
-    this.users.push(user);
-    return user;
-  }
-
-  async deleteUser(user: User) {
-    this.users = this.users.filter((u) => u.id !== user.id);
-  }
-
-  async findUserByEmail(email: string) {
-    const userFound = this.users.find((u) => u.email === email);
-    if (!userFound) {
-      throw new Error('User not found');
-    }
-    return userFound;
-  }
-
-  async findUserById(id: string) {
-    const userFound = this.users.find((u) => u.id === id);
-    if (!userFound) {
-      throw new Error('User not found');
-    }
-    return userFound;
-  }
-
-  async updateUser(user: User): Promise<User> {
-    const index = this.users.findIndex((u) => u.id === user.id);
-    this.users[index] = user;
-    return user;
   }
 }
