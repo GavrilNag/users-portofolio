@@ -1,3 +1,4 @@
+import { Button } from '@/core/adapters/primary/react/components/ui/button';
 import { selectUsersAvailableState } from '@/core/selectors/users.selector';
 import { useAppDispatch, useAppSelector } from '@/core/store/store';
 import { fetchUsers } from '@/core/usecases/retrieve-all-users/retrieve-all-users';
@@ -12,15 +13,16 @@ function App() {
   }, []);
 
   return (
-    <main className="bg-red-500">
-      <h1 className="text-3xl font-bold underline">liste des utilisateurs</h1>
+    <main>
+      <h1>liste des utilisateurs</h1>
 
       {status === 'loading' && <div>Loading...</div>}
       {users.map((user) => (
-        <div key={user.id} className="bg-blue-500">
+        <div key={user.id}>
           {user.firstName} {user.lastName}
         </div>
       ))}
+      <Button onClick={() => dispatch(fetchUsers())}>Refresh</Button>
     </main>
   );
 }
