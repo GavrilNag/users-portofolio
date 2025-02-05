@@ -2,9 +2,9 @@ import { extractErrorMessage } from '@/core/shared/errors.utils';
 import { usersSlice } from '@/core/store/slices/users.slice';
 import { AppThunk } from '@/core/store/store';
 
-export const fetchUsers =
+export const register =
   (): AppThunk<Promise<void>> =>
-  async (dispatch, _, { userRepository }) => {
+  async (dispatch, _, { userGateway: userRepository }) => {
     dispatch(usersSlice.actions.handleUsersLoading());
     try {
       const users = await userRepository.fetchUsers();

@@ -1,30 +1,29 @@
-import { Button } from '@/core/adapters/primary/react/components/ui/button';
-import { selectUsersAvailableState } from '@/core/selectors/users.selector';
-import { useAppDispatch, useAppSelector } from '@/core/store/store';
-import { fetchUsers } from '@/core/usecases/retrieve-all-users/retrieve-all-users';
-import { useEffect } from 'react';
+import AppWrapper from '@/core/adapters/primary/react/components/AppWraper';
+import PrivateRoute from '@/core/adapters/primary/react/components/PrivateRoute';
+import HomePage from '@/core/adapters/primary/react/pages/HomePage';
+import LoginPage from '@/core/adapters/primary/react/pages/LoginPage';
+import RegisterPage from '@/core/adapters/primary/react/pages/RegisterPage';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
-function App() {
-  const dispatch = useAppDispatch();
-  const { data: users, status } = useAppSelector(selectUsersAvailableState);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
-
+export default function App() {
   return (
-    <main>
-      <h1>liste des utilisateurs</h1>
-
-      {status === 'loading' && <div>Loading...</div>}
-      {users.map((user) => (
-        <div key={user.id}>
-          {user.firstName} {user.lastName}
-        </div>
-      ))}
-      <Button onClick={() => dispatch(fetchUsers())}>Refresh</Button>
-    </main>
+    <BrowserRouter>
+      <AppWrapper>
+        <Routes>
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </AppWrapper>
+    </BrowserRouter>
   );
 }
-
-export default App;

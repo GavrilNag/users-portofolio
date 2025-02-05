@@ -1,5 +1,5 @@
-import { IUserRepository } from '../ports/user-repository.interface';
+import { IUserGateway } from '../ports/user-repository.interface';
 
 export interface Dependencies {
-  userRepository: IUserRepository;
+  userGateway: IUserGateway;
 }

@@ -1,10 +1,12 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dependencies } from './dependencies';
+import { authReducer } from './slices/auth.slice';
 import { usersReducer } from './slices/users.slice';
 
 const reducers = combineReducers({
   users: usersReducer,
+  auth: authReducer,
 });
 
 export type AppStore = ReturnType<typeof createStore>;

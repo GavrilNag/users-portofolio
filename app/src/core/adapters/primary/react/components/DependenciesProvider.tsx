@@ -1,5 +1,5 @@
+import { Dependencies } from '@/core/store/dependencies';
 import { createContext, useContext } from 'react';
-import { Dependencies } from '../../../../store/dependencies';
 
 const DependenciesContext = createContext<Dependencies | null>(null);
 

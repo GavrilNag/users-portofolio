@@ -1,7 +1,7 @@
 import { UserDomainModel } from '@/core/model/user.domain-model';
-import { IUserRepository } from '@/core/ports/user-repository.interface';
+import { IUserGateway } from '@/core/ports/user-repository.interface';
 
-export class InMemoryUserRepository implements IUserRepository {
+export class InMemoryUserRepository implements IUserGateway {
   public users: UserDomainModel.User[] = [];
 
   constructor(users: UserDomainModel.User[] = []) {

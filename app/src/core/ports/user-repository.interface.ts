@@ -1,5 +1,5 @@
 import { UserDomainModel } from '../model/user.domain-model';
 
-export interface IUserRepository {
+export interface IUserGateway {
   fetchUsers(): Promise<UserDomainModel.User[]>;
 }

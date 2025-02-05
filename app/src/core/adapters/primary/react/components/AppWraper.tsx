@@ -1,5 +1,3 @@
-'use client';
-
 import { Dependencies } from '@/core/store/dependencies';
 import { AppStore, createStore } from '@/core/store/store';
 import { useRef } from 'react';
