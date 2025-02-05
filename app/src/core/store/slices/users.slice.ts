@@ -2,6 +2,10 @@ import { UserDomainModel } from '@/core/model/user.domain-model';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export const initialState: UserDomainModel.State = {
+  registerNewUser: {
+    status: 'idle',
+    error: null,
+  },
   availableUsers: {
     status: 'idle',
     error: null,
@@ -13,6 +17,16 @@ export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
+    handleRegisterNewUserLoading: (state) => {
+      state.registerNewUser.status = 'loading';
+    },
+    handleRegisterNewUserSuccess: (state) => {
+      state.registerNewUser.status = 'success';
+    },
+    handleRegisterNewUserError: (state, action: PayloadAction<string>) => {
+      state.registerNewUser.status = 'error';
+      state.registerNewUser.error = action.payload;
+    },
     storeUsers: (state, action: PayloadAction<UserDomainModel.User[]>) => {
       state.availableUsers.data = action.payload;
       state.availableUsers.status = 'success';

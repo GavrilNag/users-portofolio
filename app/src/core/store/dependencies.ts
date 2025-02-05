@@ -1,4 +1,4 @@
-import { IUserGateway } from '../ports/user-repository.interface';
+import { IUserGateway } from '../ports/user-gateway.interface';
 
 export interface Dependencies {
   userGateway: IUserGateway;

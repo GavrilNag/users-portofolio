@@ -9,6 +9,10 @@ export namespace UserDomainModel {
   };
 
   export type State = {
+    registerNewUser: {
+      status: 'idle' | 'loading' | 'success' | 'error';
+      error: string | null;
+    };
     availableUsers: {
       data: UserDomainModel.User[];
       status: 'idle' | 'loading' | 'success' | 'error';
