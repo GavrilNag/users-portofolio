@@ -15,7 +15,14 @@ export class App {
   setupDependencies(): Dependencies {
     return {
       userGateway: new InMemoryUserRepository([
-        UserFactory.create({ id: '1', firstName: 'John', lastName: 'Doe' }),
+        UserFactory.create({
+          id: '1',
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john.doe@gmail.com',
+          password: '123456789',
+          birthdate: '1990-01-01',
+        }),
       ]),
     };
   }
