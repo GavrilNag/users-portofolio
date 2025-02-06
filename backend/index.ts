@@ -1,34 +1,23 @@
+import fastifyJwt from "@fastify/jwt";
 import fastifySwagger from "@fastify/swagger";
-import fastify from "fastify";
-import { z } from "zod";
-
 import fastifySwaggerUi from "@fastify/swagger-ui";
+import fastify from "fastify";
 import {
   jsonSchemaTransform,
   serializerCompiler,
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-
-interface IQuerystring {
-  username: string;
-  password: string;
-}
-
-interface IHeaders {
-  "h-Custom": string;
-}
-
-interface IReply {
-  200: { success: boolean };
-  302: { url: string };
-  "4xx": { error: string };
-}
+import { z } from "zod";
 
 const server = fastify();
 
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
+
+server.register(fastifyJwt, {
+  secret: "supersecret",
+});
 
 server.register(fastifySwagger, {
   openapi: {
@@ -91,3 +80,10 @@ async function run() {
 }
 
 run();
+
+// export const app = new App({
+//     plugins: [AuthPlugin],
+//     routes: [AuthRoute],
+//   })
+
+//   app.listen()

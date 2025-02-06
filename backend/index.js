@@ -12,14 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const jwt_1 = __importDefault(require("@fastify/jwt"));
 const swagger_1 = __importDefault(require("@fastify/swagger"));
-const fastify_1 = __importDefault(require("fastify"));
-const zod_1 = require("zod");
 const swagger_ui_1 = __importDefault(require("@fastify/swagger-ui"));
+const fastify_1 = __importDefault(require("fastify"));
 const fastify_type_provider_zod_1 = require("fastify-type-provider-zod");
+const zod_1 = require("zod");
 const server = (0, fastify_1.default)();
 server.setValidatorCompiler(fastify_type_provider_zod_1.validatorCompiler);
 server.setSerializerCompiler(fastify_type_provider_zod_1.serializerCompiler);
+server.register(jwt_1.default, {
+    secret: "supersecret",
+});
 server.register(swagger_1.default, {
     openapi: {
         info: {
@@ -49,16 +53,6 @@ server.after(() => {
         },
     });
 });
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield server.ready();
-        yield server.listen({
-            port: 4949,
-        });
-        console.log(`Documentation running at http://localhost:4949/documentation`);
-    });
-}
-run();
 server.withTypeProvider().route({
     method: "GET",
     url: "/",
@@ -75,10 +69,13 @@ server.withTypeProvider().route({
         res.send(req.query.name);
     },
 });
-server.listen({ port: 8080 }, (err, address) => {
-    if (err) {
-        console.error(err);
-        process.exit(1);
-    }
-    console.log(`Server listening at ${address}`);
-});
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield server.ready();
+        yield server.listen({
+            port: 4949,
+        });
+        console.log(`Documentation running at http://localhost:4949/documentation`);
+    });
+}
+run();
